@@ -50,6 +50,7 @@
             0% {
                 transform: translateY(0) rotate(0deg);
             }
+
             100% {
                 transform: translateY(100vh) rotate(360deg);
             }
@@ -66,25 +67,39 @@
             max-width: 500px;
             width: 90%;
             transition: 1s;
+            opacity: 0;
+            animation: fadeIn 1.6s ease-in-out forwards;
         }
 
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+
         .container:hover {
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 30px rgba(255, 255, 255, 0.6);
+        }
+
+        h1,
+        h2 {
+            color: transparent;
+            -webkit-text-stroke: 0.2px rgb(255, 255, 255);
+            background: linear-gradient(270deg, #f3f520, #59d102);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2),
+                0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         h2 {
-            -webkit-text-stroke: 0.2px rgba(0, 0, 0, 1);
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
         h1 {
-            color: transparent; 
-            -webkit-text-stroke: 0.2px rgb(255, 255, 255);
-            background: linear-gradient(270deg, #f3f520, #59d102); 
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
@@ -112,13 +127,14 @@
         .socials a:hover {
             transform: scale(1.1);
         }
-        
+
         span.call-address {
-            -webkit-text-stroke: 0.7px black;
+            font-size: 1.2rem;
+            font-weight: 500;
         }
 
         #address-text {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.1);
             padding: 0.4rem;
             border-radius: 10px;
             font-size: 0.9rem;
@@ -131,9 +147,11 @@
             filter: brightness(0.7);
             cursor: pointer;
         }
+
         #copy-icon:active {
             filter: brightness(0.5);
         }
+
         .copy-popup {
             position: absolute;
             z-index: 999;
@@ -147,50 +165,53 @@
             pointer-events: none;
             font-size: 0.9rem;
         }
+
         .copy-popup.visible {
             opacity: 1;
         }
-        
+
         .spinning-coin {
             width: 200px;
             height: 200px;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .spinning-coin:hover {
             animation: spin 2s ease-in-out infinite;
         }
 
         @keyframes spin {
             from {
-            transform: rotateY(0deg);
+                transform: rotateY(0deg);
             }
+
             to {
-            transform: rotateY(360deg);
+                transform: rotateY(360deg);
             }
         }
-        </style>
-    </head>
+    </style>
+</head>
 
-    <body>
-        <div id="snowflakes-container"></div>
-        <div class="container">
+<body>
+    <div id="snowflakes-container"></div>
+    <div class="container">
         <h2>$LUCK</h2>
         <h1>Lucky Coin</h1>
         <img src="images/luckycoin2.png" alt="Lucky Coin Logo" class="spinning-coin" />
         <div class="socials">
             <a href="https://x.com/GetLuckyCoin" target="_blank">
-            <i class="fa-brands fa-x-twitter"></i>
+                <i class="fa-brands fa-x-twitter"></i>
             </a>
             <a href="https://www.instagram.com/officialluckycoin/" target="_blank">
-            <i class="fab fa-instagram"></i>
+                <i class="fab fa-instagram"></i>
             </a>
             <a href="https://t.me/+8dxShTH3-pdlNTM0" target="_blank">
-            <i class="fab fa-telegram-plane"></i>
+                <i class="fab fa-telegram-plane"></i>
             </a>
         </div>
         <div class="call-address">
-            <span class="call-address"> CA: </span> <span id="address-text">SOON</span> <i id="copy-icon" class="fa-regular fa-copy"></i>
+            <span class="call-address"> CA: </span> <span id="address-text">SOON</span> <i id="copy-icon"
+                class="fa-regular fa-copy"></i>
         </div>
     </div>
     <script>
@@ -215,4 +236,5 @@
         });
     </script>
 </body>
+
 </html>
