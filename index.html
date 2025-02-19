@@ -20,7 +20,7 @@
 
         body {
             font-family: Chewy, Arial, Helvetica, sans-serif;
-            background: linear-gradient(270deg, #ecff80, #48e082);
+            background: linear-gradient(270deg, rgba(243, 245, 32, 1), rgba(89, 209, 2, 1));
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -59,7 +59,7 @@
             position: relative;
             z-index: 10;
             text-align: center;
-            background: linear-gradient(90deg, rgba(236, 255, 128, 0.9), rgba(72, 224, 130, 0.9));
+            background: linear-gradient(90deg, rgba(243, 245, 32, 0.9), rgba(89, 209, 2, 0.9));
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -73,11 +73,18 @@
         }
 
         h2 {
+            -webkit-text-stroke: 0.2px rgba(0, 0, 0, 1);
             font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
         h1 {
+            color: transparent; 
+            -webkit-text-stroke: 0.2px rgb(255, 255, 255);
+            background: linear-gradient(270deg, #f3f520, #59d102); 
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
@@ -105,8 +112,12 @@
         .socials a:hover {
             transform: scale(1.1);
         }
+        
+        span.call-address {
+            -webkit-text-stroke: 0.7px black;
+        }
 
-        .call-address span {
+        #address-text {
             background: rgba(0, 0, 0, 0.3);
             padding: 0.4rem;
             border-radius: 10px;
@@ -139,48 +150,52 @@
         .copy-popup.visible {
             opacity: 1;
         }
-
+        
         .spinning-coin {
             width: 200px;
             height: 200px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .spinning-coin:hover {
             animation: spin 2s ease-in-out infinite;
         }
 
         @keyframes spin {
             from {
-                transform: rotateY(0deg);
+            transform: rotateY(0deg);
             }
             to {
-                transform: rotateY(360deg);
+            transform: rotateY(360deg);
             }
         }
-    </style>
-</head>
+        </style>
+    </head>
 
-<body>
-    <div id="snowflakes-container"></div>
-    <div class="container">
+    <body>
+        <div id="snowflakes-container"></div>
+        <div class="container">
         <h2>$LUCK</h2>
         <h1>Lucky Coin</h1>
-        <img src="images/luckycoin.jpeg" alt="Lucky Coin Logo" class="spinning-coin" />
+        <img src="images/luckycoin2.png" alt="Lucky Coin Logo" class="spinning-coin" />
         <div class="socials">
             <a href="https://x.com/GetLuckyCoin" target="_blank">
-                <i class="fa-brands fa-x-twitter"></i>
+            <i class="fa-brands fa-x-twitter"></i>
             </a>
             <a href="https://www.instagram.com/officialluckycoin/" target="_blank">
-                <i class="fab fa-instagram"></i>
+            <i class="fab fa-instagram"></i>
             </a>
-            <a href="#" target="_blank">
-                <i class="fab fa-telegram-plane"></i>
+            <a href="https://t.me/+8dxShTH3-pdlNTM0" target="_blank">
+            <i class="fab fa-telegram-plane"></i>
             </a>
         </div>
         <div class="call-address">
-            CA: <span id="address-text">SOON</span> <i id="copy-icon" class="fa-regular fa-copy"></i>
+            <span class="call-address"> CA: </span> <span id="address-text">SOON</span> <i id="copy-icon" class="fa-regular fa-copy"></i>
         </div>
     </div>
     <script>
         const numberOfSnowflakes = 100;
-        const snowflakeImages = ['images/snowflake1.png', 'images/snowflake2.png'];
+        const snowflakeImages = ['images/snowflake1.png', 'images/snowflake2.png', 'images/snowflake3.png'];
         const container = document.getElementById('snowflakes-container');
         for (let i = 0; i < numberOfSnowflakes; i++) {
             const snowflake = document.createElement('img');
