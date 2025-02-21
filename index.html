@@ -13,6 +13,13 @@
     <link rel="icon" href="images/snowflake2.png" type="image/png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/three.min.js"></script>
     <style>
+        @font-face {
+            font-family: 'Mont Heavy';
+            src: url('fonts/Mont-HeavyDEMO.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +27,7 @@
         }
         
         body {
-            font-family: Chewy, Arial, Helvetica, sans-serif;
+            font-family: 'Mont Heavy', Chewy, Arial, Helvetica, sans-serif;
             background: linear-gradient(180deg, rgba(8,19,18,1), rgba(104,217,155,1));
             min-height: 100vh;
             display: flex;
@@ -97,7 +104,7 @@
         .top-left h2 {
             margin-bottom: 0.5rem;
             color: transparent;
-            -webkit-text-stroke: 0.2px rgb(255, 255, 255);
+            -webkit-text-stroke: 1px rgb(255, 255, 255);
             background: linear-gradient(0deg, rgba(8,19,18,1), rgba(104,217,155,1));
             -webkit-background-clip: text;
             background-clip: text;
