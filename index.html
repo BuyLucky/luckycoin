@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LUCKYCOIN</title>
+    <title>$NLUCK</title>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,10 +18,10 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: Chewy, Arial, Helvetica, sans-serif;
-            background: linear-gradient(270deg, rgba(243, 245, 32, 1), rgba(89, 209, 2, 1));
+            background: linear-gradient(180deg, rgba(8,19,18,1), rgba(104,217,155,1));
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -29,7 +29,7 @@
             color: #fff;
             overflow: hidden;
         }
-
+        
         #snowflakes-container {
             position: fixed;
             z-index: 0;
@@ -39,96 +39,101 @@
             height: 100%;
             pointer-events: none;
         }
-
+        
         .snowflake {
             position: absolute;
             top: -50px;
             z-index: 0;
             animation: fall linear infinite;
         }
-
+        
         @keyframes fall {
             0% {
                 transform: translateY(0) rotate(0deg);
             }
-
             100% {
                 transform: translateY(100vh) rotate(360deg);
             }
         }
-
+        
         .container {
             position: relative;
             z-index: 10;
-            text-align: center;
-            background: linear-gradient(90deg, rgba(243, 245, 32, 0.9), rgba(89, 209, 2, 0.9));
-            padding: 2rem;
+            text-align: left;
+            background: url("images/blackonebg.png");
+            background-size: cover;
+            background-position: center;
+            padding: 1rem;
             border-radius: 15px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
             transition: 1s;
             opacity: 0;
             animation: fadeIn 1.6s ease-in-out forwards;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            flex-direction: column;
         }
-
+        
         @keyframes fadeIn {
             to {
                 opacity: 1;
             }
         }
-
-
+        
         .container:hover {
             box-shadow: 0 4px 30px rgba(255, 255, 255, 0.6);
         }
-
-        h1,
-        h2 {
+        
+        /* Flex container for top row */
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .top-left h1,
+        .top-left h2 {
+            margin-bottom: 0.5rem;
             color: transparent;
             -webkit-text-stroke: 0.2px rgb(255, 255, 255);
-            background: linear-gradient(270deg, #f3f520, #59d102);
+            background: linear-gradient(0deg, rgba(8,19,18,1), rgba(104,217,155,1));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.2),
-                 0 0 20px rgba(255, 255, 255, 0.2);
+                0 0 20px rgba(255, 255, 255, 0.2);
         }
-
+        
         @media (max-width: 768px) {
-            h1,
-            h2 {
-            color: #fff;
-            -webkit-text-stroke: 0;
-            background: none;
-            -webkit-background-clip: initial;
-            background-clip: initial;
-            -webkit-text-fill-color: initial;
+            .top-left h1,
+            .top-left h2 {
+                color: #fff;
+                -webkit-text-stroke: 0;
+                background: none;
+                -webkit-background-clip: initial;
+                background-clip: initial;
+                -webkit-text-fill-color: initial;
             }
         }
-
-        h2 {
+        
+        .top-left h2 {
             font-size: 1.5rem;
-            margin-bottom: 0.5rem;
         }
-
-        h1 {
+        
+        .top-left h1 {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
         }
-
-        img {
-            max-width: 200px;
-            width: 100%;
-            height: auto;
-            border-radius: 50%;
-            margin-bottom: 1rem;
+        
+        .top-right {
+            text-align: right;
         }
-
+        
         .socials {
             margin: 1rem 0;
         }
-
+        
         .socials a {
             margin: 0 0.5rem;
             display: inline-block;
@@ -136,16 +141,16 @@
             transition: transform 0.3s ease;
             color: #fff;
         }
-
+        
         .socials a:hover {
             transform: scale(1.1);
         }
-
-        span.call-address {
+        
+        .call-address {
             font-size: 1.2rem;
             font-weight: 500;
         }
-
+        
         #address-text {
             background: rgba(0, 0, 0, 0.1);
             padding: 0.4rem;
@@ -155,16 +160,16 @@
             font-family: Arial, Helvetica, sans-serif;
             font-weight: 700;
         }
-
+        
         #copy-icon:hover {
             filter: brightness(0.7);
             cursor: pointer;
         }
-
+        
         #copy-icon:active {
             filter: brightness(0.5);
         }
-
+        
         .copy-popup {
             position: absolute;
             z-index: 999;
@@ -178,29 +183,9 @@
             pointer-events: none;
             font-size: 0.9rem;
         }
-
+        
         .copy-popup.visible {
             opacity: 1;
-        }
-
-        .spinning-coin {
-            width: 200px;
-            height: 200px;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .spinning-coin:hover {
-            animation: spin 2s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotateY(0deg);
-            }
-
-            to {
-                transform: rotateY(360deg);
-            }
         }
     </style>
 </head>
@@ -208,28 +193,33 @@
 <body>
     <div id="snowflakes-container"></div>
     <div class="container">
-        <h2>$LUCK</h2>
-        <h1>Lucky Coin</h1>
-        <img src="images/luckycoin2.png" alt="Lucky Coin Logo" class="spinning-coin" />
-        <div class="socials">
-            <a href="https://x.com/GetLuckyCoin" target="_blank">
-                <i class="fa-brands fa-x-twitter"></i>
-            </a>
-            <a href="https://www.instagram.com/officialluckycoin/" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://t.me/+8dxShTH3-pdlNTM0" target="_blank">
-                <i class="fab fa-telegram-plane"></i>
-            </a>
-        </div>
-        <div class="call-address">
-            <span class="call-address"> CA: </span> <span id="address-text">SOON</span> <i id="copy-icon"
-                class="fa-regular fa-copy"></i>
+        <div class="top-row">
+            <div class="top-left">
+                <h2>$NLUCK</h2>
+                <h1>Nigga Luck</h1>
+            </div>
+            <div class="top-right">
+                <div class="socials">
+                    <a href="https://x.com/NiggaLuckSol" target="_blank">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/officialluckycoin" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://t.me/+8dxShTH3-pdlNTM0" target="_blank">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                </div>
+                <div class="call-address">
+                    <span>CA:</span> <span id="address-text">SOON</span> <i id="copy-icon"
+                        class="fa-regular fa-copy"></i>
+                </div>
+            </div>
         </div>
     </div>
     <script>
         const numberOfSnowflakes = 100;
-        const snowflakeImages = ['images/snowflake1.png', 'images/snowflake2.png', 'images/snowflake3.png'];
+        const snowflakeImages = ['images/snowflake1.png', 'images/snowflake2.png', 'images/snowflake3.png', 'images/watermelon.png'];
         const container = document.getElementById('snowflakes-container');
         for (let i = 0; i < numberOfSnowflakes; i++) {
             const snowflake = document.createElement('img');
