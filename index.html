@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
     <link rel="icon" href="images/snowflake2.png" type="image/png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/three.min.js"></script>
+    <!-- Import particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         @font-face {
             font-family: 'Mont Heavy';
@@ -19,13 +20,11 @@
             font-weight: normal;
             font-style: normal;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
         body {
             font-family: 'Mont Heavy', Chewy, Arial, Helvetica, sans-serif;
             background: linear-gradient(180deg, rgba(8,19,18,1), rgba(104,217,155,1));
@@ -35,34 +34,17 @@
             align-items: center;
             color: #fff;
             overflow: hidden;
+            position: relative;
         }
-        
-        #snowflakes-container {
+        /* Particles.js background */
+        #particles-js {
             position: fixed;
-            z-index: 0;
-            top: 0;
-            left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
+            top: 0;
+            left: 0;
+            z-index: -2;
         }
-        
-        .snowflake {
-            position: absolute;
-            top: -50px;
-            z-index: 0;
-            animation: fall linear infinite;
-        }
-        
-        @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
-        
         .container {
             position: relative;
             z-index: 10;
@@ -77,70 +59,44 @@
             width: 90%;
             transition: 1s;
             opacity: 0;
-            animation: fadeIn 1.6s ease-in-out forwards;
+            animation: fadeIn 1s ease-in forwards;
             aspect-ratio: 1 / 1;
             display: flex;
             flex-direction: column;
         }
-        
         @keyframes fadeIn {
             to {
                 opacity: 1;
             }
         }
-        
         .container:hover {
             box-shadow: 0 4px 30px rgba(255, 255, 255, 0.6);
         }
-        
         /* Flex container for top row */
         .top-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
         }
-        
         .top-left h1,
-        .top-left h2 {
+        .top-left h2,
+        #call-address-text {
             margin-bottom: 0.5rem;
-            color: transparent;
-            -webkit-text-stroke: 1px rgb(255, 255, 255);
-            background: linear-gradient(0deg, rgba(8,19,18,1), rgba(104,217,155,1));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2),
-                0 0 20px rgba(255, 255, 255, 0.2);
+            color: #fff;
+            text-shadow: 0 0 2px #fff;
         }
-        
-        @media (max-width: 768px) {
-            .top-left h1,
-            .top-left h2 {
-                color: #fff;
-                -webkit-text-stroke: 0;
-                background: none;
-                -webkit-background-clip: initial;
-                background-clip: initial;
-                -webkit-text-fill-color: initial;
-            }
-        }
-        
         .top-left h2 {
             font-size: 1.5rem;
         }
-        
         .top-left h1 {
             font-size: 2.5rem;
         }
-        
         .top-right {
             text-align: right;
         }
-        
         .socials {
             margin: 1rem 0;
         }
-        
         .socials a {
             margin: 0 0.5rem;
             display: inline-block;
@@ -148,35 +104,25 @@
             transition: transform 0.3s ease;
             color: #fff;
         }
-        
         .socials a:hover {
             transform: scale(1.1);
         }
-        
         .call-address {
             font-size: 1.2rem;
             font-weight: 500;
         }
-        
         #address-text {
-            background: rgba(0, 0, 0, 0.1);
             padding: 0.4rem;
-            border-radius: 10px;
             font-size: 0.9rem;
-            word-break: break-all;
-            font-family: Arial, Helvetica, sans-serif;
             font-weight: 700;
         }
-        
         #copy-icon:hover {
             filter: brightness(0.7);
             cursor: pointer;
         }
-        
         #copy-icon:active {
             filter: brightness(0.5);
         }
-        
         .copy-popup {
             position: absolute;
             z-index: 999;
@@ -190,15 +136,15 @@
             pointer-events: none;
             font-size: 0.9rem;
         }
-        
         .copy-popup.visible {
             opacity: 1;
         }
     </style>
 </head>
-
 <body>
-    <div id="snowflakes-container"></div>
+    <!-- Particles.js background container -->
+    <div id="particles-js"></div>
+    
     <div class="container">
         <div class="top-row">
             <div class="top-left">
@@ -218,33 +164,90 @@
                     </a>
                 </div>
                 <div class="call-address">
-                    <span>CA:</span> <span id="address-text">SOON</span> <i id="copy-icon"
-                        class="fa-regular fa-copy"></i>
+                    <span id="call-address-text">CA:</span> <span id="address-text">SOON</span> 
+                    <i id="copy-icon" class="fa-regular fa-copy"></i>
                 </div>
             </div>
         </div>
     </div>
+    
     <script>
-        const numberOfSnowflakes = 100;
-        const snowflakeImages = ['images/snowflake1.png', 'images/snowflake2.png', 'images/snowflake3.png', 'images/watermelon.png', 'images/kfc.png'];
-        const container = document.getElementById('snowflakes-container');
-        for (let i = 0; i < numberOfSnowflakes; i++) {
-            const snowflake = document.createElement('img');
-            snowflake.src = snowflakeImages[Math.floor(Math.random() * snowflakeImages.length)];
-            snowflake.classList.add('snowflake');
-            const size = Math.random() * 20 + 10;
-            snowflake.style.width = `${size}px`;
-            snowflake.style.height = `${size}px`;
-            snowflake.style.left = `${Math.random() * 100}vw`;
-            snowflake.style.animationDuration = `${Math.random() * 5 + 3}s`;
-            snowflake.style.animationDelay = `${Math.random() * 5}s`;
-            container.appendChild(snowflake);
-        }
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 500
+                    }
+                },
+                "color": {
+                    "value": "#ffffff"
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#ffffff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "bounce",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "window",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 200,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "repulse": {
+                        "distance": 100,
+                        "duration": 0.4
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
         document.getElementById('copy-icon').addEventListener('click', () => {
             const address = document.getElementById('address-text').textContent;
             navigator.clipboard.writeText(address);
         });
     </script>
 </body>
-
 </html>
